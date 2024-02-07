@@ -26,7 +26,7 @@ router.get('/', check.auth, async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', check.auth, async (req, res, next) => {
   try {
     const userID = req.params.id
     const data = await controller.getUserByID(userID)

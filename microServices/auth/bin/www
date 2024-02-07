@@ -1,0 +1,14 @@
+const app = require('./../app');
+const config = require('./../config/config')
+
+const host = config.APP.HOST;
+const port = config.APP.PORT;
+
+app.listen(port, (err) => {
+  if(err) {
+    console.error(`Can't open port ${port}, may be it's busy`);
+  } else {
+    console.log()
+    console.log(`Server's running in ${host}:${port}`);
+  }
+});

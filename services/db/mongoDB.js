@@ -1,14 +1,8 @@
-const db  = require('mongoose');
+const { MongoClient } = require('mongodb');
 
-db.promise = global.Promise;
-
-async function connect(url) {
-  await db.connect(url, {
-  }).then(() => {
-    console.log(`Database's connected successfully`);
-  }).catch((err) => {
-    console.error(`Connection failed, caused by: ${err}`)
-  })
+async function connect(uri) {
+  const client = new MongoClient(uri);
+  return client;
 }
 
 module.exports = connect;

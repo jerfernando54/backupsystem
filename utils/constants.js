@@ -25,6 +25,11 @@ module.exports = {
     USER_CREATED : 'Your account has been created successfully',
   },
 
+  BACKUP: {
+    SAVED: 'Backup saved',
+    INVALID_PAGE_ID: 'Invalid page id'
+  },
+
   //STATUS CODE
 
   STATUS_CODE: {

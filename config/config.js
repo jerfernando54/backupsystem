@@ -7,9 +7,12 @@ const CONFIG = {
   },
 
   AUTH: {
-    USER: process.env.ID,
-    PASSWORD: process.env.PASSWORD
+    USER: process.env.AUTH_USER_ID,
+    PASSWORD: process.env.AUTH_PASSWORD,
+    URL: process.env.AUTH_URL
   },
+
+  
 
   DB: {
     URL: process.env.MONGO_DB_URL
@@ -17,6 +20,14 @@ const CONFIG = {
 
   JWTSECRET: {
     SECRET: process.env.JWT_SECRET
+  },
+
+  TOKEN: {
+    USER_TOKEN: process.env.TOKEN
+  },
+
+  BASE: {
+    URL: process.env.URL
   }
 }
 
