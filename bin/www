@@ -11,18 +11,18 @@ const db = require('./../services/db/mongoDB')
 const CONFIG = require('./../config/config')
 const DB_URL = CONFIG.DB.URL 
 
-async function connect () {
-  const client = await db(DB_URL)
-  try{
-    await client.connect()
-  } catch(e) {
-    console.log(e);
-  } finally {
-    await client.close();
-  }
-}
+// async function connect () {
+//   const client = await db(DB_URL)
+//   try{
+//     await client.connect()
+//   } catch(e) {
+//     console.log(e);
+//   } finally {
+//     await client.close();
+//   }
+// }
 
-connect().catch(console.error);
+// connect().catch(console.error);
 
 
 /**

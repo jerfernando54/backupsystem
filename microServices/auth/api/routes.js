@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
     })
   }
   catch(error) {
+    console.error(error)
     const error_message = error.response.data.error
     const error_status = error.response.status
     res.status(error_status).send({error: error_message})

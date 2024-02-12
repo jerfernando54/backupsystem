@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
+router.get('/', check.auth, async (req, res, next) => {
   try {
     const backups = await controller.getBackups();
     res.status(STATUS_CODE.SUCCESS).send(backups);

@@ -6,12 +6,12 @@ const SECRET = CONFIG.JWTSECRET.toString();
 
 const createToken = (user) => {
   const payload = {
-    id: user.id,
-    name: user.name,
+    id: user._id,
+    username: user.username,
     email: user.email,
-    created_at: user.enrol,
+    created_at: user.created_at,
     iat: moment().unix(),
-    exp: moment().add(3, 'Days').unix()
+    exp: moment().add(2, 'Days').unix()
   }
 
   const token = jwt.encode(payload, SECRET);

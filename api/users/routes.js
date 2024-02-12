@@ -28,11 +28,11 @@ router.get('/', check.auth, async (req, res, next) => {
 
 router.get('/:id', check.auth, async (req, res, next) => {
   try {
-    const userID = req.params.id
-    const data = await controller.getUserByID(userID)
-    response.successResponse(res, data)
+    const userID = req.params.id;
+    const data = await controller.getUserByID(userID);
+    response.successResponse(res, data);
   } catch(err) {
-    response.errorResponse(res, ERROR.INTERNAL_ERROR)
+    response.errorResponse(res, ERROR.INTERNAL_ERROR);
   }
 })
 

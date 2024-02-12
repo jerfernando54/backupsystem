@@ -12,7 +12,10 @@ const CONFIG = {
     URL: process.env.AUTH_URL
   },
 
-  
+  SEND_EMAIL: {
+    USER: process.env.AUTH_EMAIL,
+    PASSWORD: process.env.AUTH_EMAIL_PASSWORD
+  },
 
   DB: {
     URL: process.env.MONGO_DB_URL

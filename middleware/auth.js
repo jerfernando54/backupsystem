@@ -9,7 +9,7 @@ exports.auth = (req, res, next) => {
   const {authorization} = req.headers;
 
   if(!authorization){
-    return { status: STATUS_CODE.UNAUTHORIZED, error: AUTH.NO_AUTHENTICATION_HEADER };
+    return res.status(STATUS_CODE.UNAUTHORIZED).json({error: AUTH.NO_AUTHENTICATION_HEADER});
   }
   
   const token = req.headers.authorization.replace(/['"]+/g, '')
@@ -20,15 +20,15 @@ exports.auth = (req, res, next) => {
     }
 
     const tokenWithoutBearer = token.replace(/^Bearer /, '');
-    
     const payload = jwt.decode(tokenWithoutBearer, SECRET);
+    
     if(payload.exp <= moment.unix()) {
-      return { status: STATUS_CODE.UNAUTHORIZED, error: AUTH.EXPIRED_TOKEN};
+      return res.status(STATUS_CODE.UNAUTHORIZED).json({error: AUTH.EXPIRED_TOKEN});
     }
     
     next();
   } catch(err) {
-    return { status: STATUS_CODE.UNAUTHORIZED, error: AUTH.INVALID_TOKEN};
+    return res.status(STATUS_CODE.UNAUTHORIZED).json({error: AUTH.INVALID_TOKEN});
   }
 }
 

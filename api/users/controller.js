@@ -17,7 +17,7 @@ module.exports = {
   },
 
   async getUserByID(userID) {
-    const user = await dao.getUserById(userID)
+    const user = await dao.getUserByID(userID)
     return user;
   }
 }

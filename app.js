@@ -1,18 +1,16 @@
+'use strict';
 const express = require('express');
+const cron = require('node-cron');
+const bodyParser = require("body-parser");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
-bodyParser = require("body-parser"),
-swaggerJsdoc = require("swagger-jsdoc"),
-swaggerUi = require("swagger-ui-express");
-
+const scriptBackup = require('./public/javascripts/backup'); 
 const SWAGGER_CONFIG = require('./services/documentation/swagger')
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-//Middleware
-const check = require('./middleware/auth')
-
 
 // ROUTES //
 const indexRouter = require('./routes/index');
@@ -42,8 +40,16 @@ app.use(API, authRouter);
 app.use(API, usersRouter);
 app.use(API, pagesRouter);
 
-app.get('/', (req, res) => {
-  res.send(`CRUST BACKUP API'S RUNNING`);
-})
+cron.schedule('* * * * *', async () => {
+  await scriptBackup.getBackup();
+}, {
+  schedule: true,
+  timezone: "Europe/Madrid"
+});
+
+app.get('/', async (req, res) => {
+  await scriptBackup.sendEmail();
+  res.send(`Server backup is running`);
+});
 
 module.exports = app;

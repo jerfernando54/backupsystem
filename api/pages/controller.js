@@ -11,10 +11,12 @@ module.exports = {
 
     for (const page of set){
       const updatedAt = new Date(page.updatedAt);
-
       if (updatedAt >= yesterday){
         pages.push(page);
       }
+    }
+    if(pages.length === 0){
+      return 'There are no changes'
     }
     const res = await dao.saveBackup(pages);
   

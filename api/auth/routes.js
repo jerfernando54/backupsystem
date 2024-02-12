@@ -5,7 +5,6 @@ const { ERROR, SUSCCESS, STATUS_CODE } = require('./../../utils/constants')
 const response = require('./../../utils/response')
 
 router.post('/login', async (req, res) => {
-  console.log(req.body)
   try {
     const data = await controller.login(req.body)
     response.successResponse(res, data, data.statusCode)
