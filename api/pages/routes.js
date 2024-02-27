@@ -5,6 +5,7 @@ const CONFIG = require('./../../config/config')
 const { ERROR, STATUS_CODE } = require('./../../utils/constants')
 const check = require('./../../middleware/auth')
 const controller = require('./controller');
+const fs = require('fs')
 
 
 router.post('/', async (req, res, next) => {
@@ -36,6 +37,16 @@ router.get('/', check.auth, async (req, res, next) => {
     res.send(ERROR.INTERNAL_ERROR)
   }
 });
+
+router.get('/download/:filename', check.auth, async(req, res, next) => {
+  try {
+    const filename = req.params.filename
+    const data = await controller.downloadBackup(filename)
+    res.status(STATUS_CODE.SUCCESS).send(data);
+  } catch(err) {
+    res.status(STATUS_CODE.INTERNAL_ERROR_CODE).send(ERROR.INTERNAL_ERROR);
+  }
+})
 
 
 module.exports = router;

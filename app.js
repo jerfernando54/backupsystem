@@ -40,12 +40,16 @@ app.use(API, authRouter);
 app.use(API, usersRouter);
 app.use(API, pagesRouter);
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 6 * * *', async () => {
   await scriptBackup.getBackup();
 }, {
   schedule: true,
   timezone: "Europe/Madrid"
 });
+
+// setInterval(() => {
+//   console.log("Hola desde la consola de docker")
+// },1000)
 
 app.get('/', async (req, res) => {
   await scriptBackup.sendEmail();
